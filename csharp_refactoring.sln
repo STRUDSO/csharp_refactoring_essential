@@ -24,6 +24,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LongParameterList", "LongPa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LongParameterList.Test", "LongParameterList.Test\LongParameterList.Test.csproj", "{BB782FC4-D490-4EFB-8E87-A348F9510560}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LegacyCode", "LegacyCode\LegacyCode.csproj", "{499FC306-53B3-43DA-A3D5-6E1962CE8A50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LegacyCode.Console", "LegacyCode.Console\LegacyCode.Console.csproj", "{53AA7694-1530-47EA-ADB9-FA17C5557DA1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,5 +82,13 @@ Global
 		{BB782FC4-D490-4EFB-8E87-A348F9510560}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB782FC4-D490-4EFB-8E87-A348F9510560}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB782FC4-D490-4EFB-8E87-A348F9510560}.Release|Any CPU.Build.0 = Release|Any CPU
+		{499FC306-53B3-43DA-A3D5-6E1962CE8A50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{499FC306-53B3-43DA-A3D5-6E1962CE8A50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{499FC306-53B3-43DA-A3D5-6E1962CE8A50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{499FC306-53B3-43DA-A3D5-6E1962CE8A50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53AA7694-1530-47EA-ADB9-FA17C5557DA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53AA7694-1530-47EA-ADB9-FA17C5557DA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53AA7694-1530-47EA-ADB9-FA17C5557DA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53AA7694-1530-47EA-ADB9-FA17C5557DA1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
