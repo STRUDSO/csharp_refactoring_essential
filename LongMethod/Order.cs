@@ -25,7 +25,7 @@ public class OrderItems
         }
     }
 
-    public double CalculateSubtotal()
+    public double Subtotal()
     {
         return Items.Sum(item => item.Price * item.Quantity);
     }
@@ -47,17 +47,14 @@ public class Order
 
     public OrderSummary Summarise()
     {
-        // Validation
         _orderItems.ValidateItems();
 
-        // Subtotal calculation
-        var subtotal = _orderItems.CalculateSubtotal();
+        var subtotal = _orderItems.Subtotal();
 
-        // Discount rules
-        var discount = _customer.DiscountStrategy()(subtotal);
+        var discount = _customer.GetDiscountRule()(subtotal);
 
         // Tax calculation
-        var taxableAmount = CalculateTaxableAmount(subtotal, discount, out var tax);
+        var (taxableAmount, tax) = TaxableAmount(subtotal, discount);
 
         // Total calculation
         var total = CalculateTotal(taxableAmount, tax);
@@ -65,17 +62,17 @@ public class Order
         return new OrderSummary(subtotal, discount, tax, total);
     }
 
+    private static (double taxableAmount, double tax) TaxableAmount(double subtotal, double discount)
+    {
+        double taxableAmount = subtotal - discount;
+        var tax = taxableAmount * 0.20;
+        return (taxableAmount, tax);
+    }
+
     private static double CalculateTotal(double taxableAmount, double tax)
     {
         double total = taxableAmount + tax;
         return total;
-    }
-
-    private static double CalculateTaxableAmount(double subtotal, double discount, out double tax)
-    {
-        double taxableAmount = subtotal - discount;
-        tax = taxableAmount * 0.20;
-        return taxableAmount;
     }
 }
 
@@ -88,7 +85,7 @@ public class Customer
         IsLoyal = loyal;
     }
 
-    public Func<double, double> DiscountStrategy()
+    public Func<double, double> GetDiscountRule()
     {
         Func<double, double> discountStrategy = 
             IsLoyal 
