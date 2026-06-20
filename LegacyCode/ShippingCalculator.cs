@@ -44,9 +44,9 @@ public class ExpressCalc : ICalculateShipping
     }
 }
 
-public class StandardCal
+public class StandardCal : ICalculateShipping
 {
-    public static double Calculate(Order order)
+    public double Calculate(Order order)
     {
         return order.WeightKg * 0.5;
     }
@@ -60,7 +60,8 @@ public class ShippingBla
         switch (order.ShippingType)
         {
             case "STANDARD":
-                return StandardCal.Calculate(order);
+                calculateShipping = new StandardCal();
+                break;
 
             case "EXPRESS":
                 calculateShipping = new ExpressCalc();
