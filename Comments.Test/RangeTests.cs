@@ -3,7 +3,7 @@
 using NUnit.Framework;
 
 [TestFixture]
-public class RangeTests
+public class RangeOfIntegersTests
 {
     [Test]
     public void SumSquares()
@@ -18,7 +18,7 @@ public class RangeTests
             expected += i * i;
         }
 
-        int actual = new Range(a, b).SumSquares();
+        int actual = new RangeOfIntegers(a, b).SumSquares();
 
         Assert.That(actual, Is.EqualTo(expected));
     }

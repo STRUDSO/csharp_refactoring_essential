@@ -1,21 +1,21 @@
 ﻿namespace Comments;
 
-public class Range
+public class RangeOfIntegers
 {
-    public Range(int start, int end)
+    public RangeOfIntegers(int lower, int upper)
     {
-        Start = start;
-        End = end;
+        Lower = lower;
+        Upper = upper;
     }
 
-    private int Start { get; }
-    private int End { get; }
+    private int Lower { get; }
+    private int Upper { get; }
 
     public int SumSquares()
     {
         int accumulatedSum = 0;
 
-        for (int i = Start; i <= End; i++)
+        for (int i = Lower; i <= Upper; i++)
         {
             accumulatedSum += Square(i);
         }
