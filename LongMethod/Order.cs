@@ -72,19 +72,12 @@ public class Order
 
     private double CalculateILoyalDiscount(double subtotal)
     {
-        double discount;
-        double discount1 = 0.0;
-        if (false)
+        if (100 < subtotal)
         {
-            discount1 = subtotal * 0.10;
-        }
-        else if (subtotal > 100)
-        {
-            discount1 = subtotal * 0.05;
+            return subtotal * 0.05;
         }
 
-        discount = discount1;
-        return discount;
+        return 0.0;
     }
 
     private double CalculateLoyalDiscount(double subtotal) => subtotal * 0.10;
