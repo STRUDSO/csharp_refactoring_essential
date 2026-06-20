@@ -26,11 +26,20 @@ public class EmailValueObject
     }
 }
 
-public class FormatDisplay
+public class DisplayName
 {
-    public string FormatDisplayName(string firstName, string lastName)
+    private readonly string _firstName;
+    private readonly string _lastName;
+
+    public DisplayName(string firstName, string lastName)
     {
-        return firstName.Trim() + " " + lastName.Trim().ToUpper();
+        _firstName = firstName;
+        _lastName = lastName;
+    }
+
+    public string Format()
+    {
+        return _firstName.Trim() + " " + _lastName.Trim().ToUpper();
     }
 }
 
@@ -61,11 +70,8 @@ public class AccountStatusCalculator
 
 public class CustomerService
 {
-    private readonly FormatDisplay _formatDisplay = new();
     private readonly LoyaltyCalculator _loyaltyCalculator = new();
     private readonly AccountStatusCalculator _accountStatusCalculator = new();
-
-    public FormatDisplay FormatDisplayName => _formatDisplay;
 
     public LoyaltyCalculator LoyaltyCalculator => _loyaltyCalculator;
 
