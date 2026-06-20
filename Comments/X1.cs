@@ -6,7 +6,6 @@ public class X1
     {
         int p = 0;
 
-        // Iterate from lower bound (q) to upper bound (z)
         for (int i = q; i <= z; i++)
         {
             // Add square of each number in the range
