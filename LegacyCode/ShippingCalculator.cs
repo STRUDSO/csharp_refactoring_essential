@@ -75,7 +75,8 @@ public class EverythingShippingCalculator : ICalculateShipping
 
 public class ShippingCalculator
 {
-    private readonly HttpClient _httpClient = new HttpClient();
+    private readonly EverythingShippingCalculator _shippingCalculator = new();
+    private readonly HttpClient _httpClient = new();
 
     public double CalculateShipping(int orderId)
     {
@@ -105,7 +106,7 @@ public class ShippingCalculator
             if (order == null)
                 throw new Exception("Failed to deserialize order");
             
-            return new EverythingShippingCalculator().Calculate(order);
+            return _shippingCalculator.Calculate(order);
         }
         catch (Exception e)
         {
