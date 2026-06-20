@@ -3,9 +3,17 @@
 using System;
 using System.Text.RegularExpressions;
 
-public class CustomerService
+public class EmailValueObject
 {
-    public bool IsValidEmail(string email)
+    public static EmailValueObject? Parse(string email)
+    {
+        var isValidEmail = IsValidEmail(email);
+        if (isValidEmail)
+            return new EmailValueObject();
+        return null;
+    }
+
+    private static bool IsValidEmail(string email)
     {
         if (email == null)
         {
@@ -14,7 +22,15 @@ public class CustomerService
 
         return Regex.IsMatch(
             email,
-            @"^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
+            "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
+    }
+}
+
+public class CustomerService
+{
+    public bool IsValidEmail(string email)
+    {
+        return EmailValueObject.Parse(email) != null;
     }
 
     public string FormatDisplayName(string firstName, string lastName)
