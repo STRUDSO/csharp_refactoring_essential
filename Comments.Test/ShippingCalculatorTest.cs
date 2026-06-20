@@ -4,17 +4,18 @@ namespace Comments.Test;
 
 [TestFixture]
 [TestOf(typeof(ShippingCalculator))]
-public class ShippingCalculatorTest
-{
+public class ShippingCalculatorTest {
 
-    [TestCase("STANDARD", 5, 2.5)]
-    [TestCase("OVERNIGHT", 2, 27.4)]
-    public void Order1001(string shippingType, double weightKg, double expected)
+    [TestCase("STANDARD",  5,   120, 2.5)]
+    [TestCase("OVERNIGHT", 2,    50, 27.4)]
+    [TestCase("EXPRESS",   8.5, 300, 36.8)]
+    public void Order1001(string shippingType, double weightKg, double distanceKm, double expected)
     {
         var actual = ShippingCalculator.TestableShipping(new Order
         {
             ShippingType = shippingType,
-            WeightKg = weightKg
+            WeightKg = weightKg,
+            DistanceKm = distanceKm
         });
         Assert.That(actual, Is.EqualTo(expected));
     }
