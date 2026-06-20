@@ -26,16 +26,23 @@ public class EmailValueObject
     }
 }
 
-public class CustomerService
+public class FormatDisplay
 {
-    public bool IsValidEmail(string email)
-    {
-        return EmailValueObject.Parse(email) != null;
-    }
-
     public string FormatDisplayName(string firstName, string lastName)
     {
         return firstName.Trim() + " " + lastName.Trim().ToUpper();
+    }
+}
+
+public class CustomerService
+{
+    private readonly FormatDisplay _formatDisplay = new FormatDisplay();
+
+    public FormatDisplay FormatDisplayName1 => _formatDisplay;
+
+    public bool IsValidEmail(string email)
+    {
+        return EmailValueObject.Parse(email) != null;
     }
 
     public int CalculateLoyaltyPoints(int numberOfPurchases)
