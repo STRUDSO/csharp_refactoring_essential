@@ -67,12 +67,18 @@ public class Order
 
     private double CustomerBasedDiscount(double subtotal)
     {
-        double discount;
+        Func<double, double> discountStrategy;
         if(_customer.IsLoyal)
-            discount = CalculateLoyalDiscount(subtotal);
+        {
+            discountStrategy = CalculateLoyalDiscount;
+        }
         else
-            discount = CalculateILoyalDiscount(subtotal);
-        return discount;
+        {
+            discountStrategy = CalculateILoyalDiscount;
+            
+        }
+
+        return discountStrategy(subtotal);
     }
 
     private double CalculateILoyalDiscount(double subtotal)
