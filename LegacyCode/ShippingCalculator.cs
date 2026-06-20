@@ -46,26 +46,31 @@ public class ShippingCalculator
             if (order == null)
                 throw new Exception("Failed to deserialize order");
             
-            switch (order.ShippingType)
-            {
-                case "STANDARD":
-                    return order.WeightKg * 0.5;
-
-                case "EXPRESS":
-                    return order.WeightKg * 0.8
-                           + order.DistanceKm * 0.1;
-
-                case "OVERNIGHT":
-                    return order.WeightKg * 1.2 + 25;
-
-                default:
-                    throw new Exception($"Unknown shipping type: {order.ShippingType}");
-            }
+            return TestableShipping(order);
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
             return -1;
+        }
+    }
+
+    public static double TestableShipping(Order order)
+    {
+        switch (order.ShippingType)
+        {
+            case "STANDARD":
+                return order.WeightKg * 0.5;
+
+            case "EXPRESS":
+                return order.WeightKg * 0.8
+                       + order.DistanceKm * 0.1;
+
+            case "OVERNIGHT":
+                return order.WeightKg * 1.2 + 25;
+
+            default:
+                throw new Exception($"Unknown shipping type: {order.ShippingType}");
         }
     }
 }

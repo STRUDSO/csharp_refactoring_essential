@@ -8,8 +8,12 @@ public class ShippingCalculatorTest
 {
 
     [Test]
-    public void METHOD()
+    public void ZeroOrderZeroShipping()
     {
-        
+        var actual = ShippingCalculator.TestableShipping(new Order
+        {
+            ShippingType = "STANDARD"
+        });
+        Assert.That(actual, Is.EqualTo(0));
     }
 }
