@@ -8,17 +8,14 @@ public class Range
         End = end;
     }
 
-    public int Start { get; }
-    public int End { get; }
-}
+    private int Start { get; }
+    private int End { get; }
 
-public class X1
-{
-    public static int SumSquaresOf(Range range)
+    public int SumSquaresOf()
     {
         int accumulatedSum = 0;
 
-        for (int i = range.Start; i <= range.End; i++)
+        for (int i = Start; i <= End; i++)
         {
             accumulatedSum += Square(i);
         }

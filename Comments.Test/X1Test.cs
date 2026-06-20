@@ -18,7 +18,7 @@ public class X1Test
             expected += i * i;
         }
 
-        int actual = X1.SumSquaresOf(new Range(a, b));
+        int actual = new Range(a, b).SumSquaresOf();
 
         Assert.That(actual, Is.EqualTo(expected));
     }
