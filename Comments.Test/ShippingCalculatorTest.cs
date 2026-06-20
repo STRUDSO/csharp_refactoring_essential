@@ -6,9 +6,10 @@ namespace Comments.Test;
 [TestOf(typeof(ShippingCalculator))]
 public class ShippingCalculatorTest {
 
-    [TestCase("STANDARD",  5,   120, 2.5)]
-    [TestCase("OVERNIGHT", 2,    50, 27.4)]
-    [TestCase("EXPRESS",   8.5, 300, 36.8)]
+    [TestCase("STANDARD",          5,   120,  2.5)]
+    [TestCase("OVERNIGHT",         2,    50, 27.4)]
+    [TestCase("EXPRESS",         8.5,   300, 36.8)]
+    [TestCase("INTERNATIONAL",     2,    50,  3.0)]
     public void Order1001(string shippingType, double weightKg, double distanceKm, double expected)
     {
         var actual = ShippingCalculator.TestableShipping(new Order

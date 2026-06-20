@@ -69,6 +69,9 @@ public class ShippingCalculator
             case "OVERNIGHT":
                 return order.WeightKg * 1.2 + 25;
 
+            case "INTERNATIONAL":
+                return order.WeightKg * 1.5;
+
             default:
                 throw new Exception($"Unknown shipping type: {order.ShippingType}");
         }
