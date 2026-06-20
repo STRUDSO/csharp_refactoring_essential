@@ -18,6 +18,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Comments\Comments.csproj" />
+      <ProjectReference Include="..\LegacyCode\LegacyCode.csproj" />
     </ItemGroup>
 
 </Project>
