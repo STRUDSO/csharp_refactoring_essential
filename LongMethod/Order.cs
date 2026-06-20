@@ -54,7 +54,7 @@ public class Order
         var subtotal = _orderItems.CalculateSubtotal();
 
         // Discount rules
-        var discount = CalculateDiscount(subtotal);
+        var discount = CalculateDiscount(subtotal, _customer.IsLoyal);
 
         // Tax calculation
         var taxableAmount = CalculateTaxableAmount(subtotal, discount, out var tax);
@@ -78,10 +78,10 @@ public class Order
         return taxableAmount;
     }
 
-    private double CalculateDiscount(double subtotal)
+    private double CalculateDiscount(double subtotal, bool customerIsLoyal)
     {
         double discount = 0.0;
-        if (_customer.IsLoyal)
+        if (customerIsLoyal)
         {
             discount = subtotal * 0.10;
         }
