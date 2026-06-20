@@ -8,7 +8,7 @@ public class PriceCalculator
 
         if (product.IsOnSale())
         {
-            price = price * 0.8;
+            price *= 0.8;
         }
 
         return price;
