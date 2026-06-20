@@ -10,12 +10,11 @@ public class OrderTests
     [Test]
     public void Summarise_CalculatesCorrectSummary_ForNonLoyalCustomer_UnderThreshold()
     {
-        var order = new Order(
-            new List<OrderItem>
+        var order = new Order(new OrderItems(new List<OrderItem>
             {
                 new OrderItem(10.0, 2), // 20
                 new OrderItem(5.0, 2)   // 10
-            },
+            }),
             new Customer(false));
 
         var summary = order.Summarise();
@@ -29,11 +28,10 @@ public class OrderTests
     [Test]
     public void Summarise_AppliesLoyalCustomerDiscount()
     {
-        var order = new Order(
-            new List<OrderItem>
+        var order = new Order(new OrderItems(new List<OrderItem>
             {
                 new OrderItem(50.0, 1)
-            },
+            }),
             new Customer(true));
 
         var summary = order.Summarise();
@@ -47,11 +45,10 @@ public class OrderTests
     [Test]
     public void Summarise_AppliesBulkDiscount_ForNonLoyalCustomer_OverThreshold()
     {
-        var order = new Order(
-            new List<OrderItem>
+        var order = new Order(new OrderItems(new List<OrderItem>
             {
                 new OrderItem(120.0, 1)
-            },
+            }),
             new Customer(false));
 
         var summary = order.Summarise();
@@ -69,7 +66,7 @@ public class OrderTests
     [Test]
     public void Summarise_ThrowsException_WhenItemsIsNull()
     {
-        var order = new Order(null, new Customer(false));
+        var order = new Order(new OrderItems(null), new Customer(false));
 
         var ex = Assert.Throws<InvalidOperationException>(
             () => order.Summarise());
@@ -80,8 +77,7 @@ public class OrderTests
     [Test]
     public void Summarise_ThrowsException_WhenItemsIsEmpty()
     {
-        var order = new Order(
-            new List<OrderItem>(),
+        var order = new Order(new OrderItems(new List<OrderItem>()),
             new Customer(false));
 
         var ex = Assert.Throws<InvalidOperationException>(
@@ -97,11 +93,10 @@ public class OrderTests
     [Test]
     public void Summarise_NoDiscount_WhenNonLoyalCustomer_AtThreshold()
     {
-        var order = new Order(
-            new List<OrderItem>
+        var order = new Order(new OrderItems(new List<OrderItem>
             {
                 new OrderItem(100.0, 1)
-            },
+            }),
             new Customer(false));
 
         var summary = order.Summarise();

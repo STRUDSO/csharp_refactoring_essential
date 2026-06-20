@@ -3,13 +3,24 @@
 using System;
 using System.Collections.Generic;
 
+public class OrderItems
+{
+    public OrderItems(List<OrderItem> items)
+    {
+        Items = items;
+    }
+
+    public List<OrderItem> Items { get; }
+}
+
 public class Order
 {
     private readonly List<OrderItem> _items;
     private readonly Customer _customer;
 
-    public Order(List<OrderItem> items, Customer customer)
+    public Order(OrderItems orderItems, Customer customer)
     {
+        var items = orderItems.Items;
         _items = items;
         _customer = customer;
     }
@@ -17,7 +28,7 @@ public class Order
     public OrderSummary Summarise()
     {
         // Validation
-        ValidateOrder();
+        ValidateItems();
 
         // Subtotal calculation
         var subtotal = CalculateSubtotal();
@@ -73,7 +84,7 @@ public class Order
         return subtotal;
     }
 
-    private void ValidateOrder()
+    private void ValidateItems()
     {
         if (_items == null)
         {
