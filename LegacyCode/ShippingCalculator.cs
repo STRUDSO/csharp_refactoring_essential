@@ -52,7 +52,7 @@ public class StandardCal : ICalculateShipping
     }
 }
 
-public class ShippingBla : ICalculateShipping
+public class EverythingShippingCalculator : ICalculateShipping
 {
     public double Calculate(Order order)
     {
@@ -105,18 +105,13 @@ public class ShippingCalculator
             if (order == null)
                 throw new Exception("Failed to deserialize order");
             
-            return TestableShipping(order);
+            return new EverythingShippingCalculator().Calculate(order);
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
             return -1;
         }
-    }
-
-    public static double TestableShipping(Order order)
-    {
-        return new ShippingBla().Calculate(order);
     }
 }
 

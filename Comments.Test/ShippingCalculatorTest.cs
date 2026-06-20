@@ -12,12 +12,13 @@ public class ShippingCalculatorTest {
     [TestCase("INTERNATIONAL",     2,    50,  3.0)]
     public void Order1001(string shippingType, double weightKg, double distanceKm, double expected)
     {
-        var actual = ShippingCalculator.TestableShipping(new Order
+        Order order = new Order
         {
             ShippingType = shippingType,
             WeightKg = weightKg,
             DistanceKm = distanceKm
-        });
+        };
+        var actual = new EverythingShippingCalculator().Calculate(order);
         Assert.That(actual, Is.EqualTo(expected));
     }
 }
