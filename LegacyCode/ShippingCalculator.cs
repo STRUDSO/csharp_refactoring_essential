@@ -14,9 +14,14 @@ public class Order
     public bool Fragile { get; set; }
 }
 
-public class InternationalShippingBla
+public interface ICalculateShipping
 {
-    public double InternationalShipping(Order order)
+    double Calculate(Order order);
+}
+
+public class InternationalShippingBla : ICalculateShipping
+{
+    public double Calculate(Order order)
     {
         return order.WeightKg * 1.5;
     }
@@ -39,7 +44,7 @@ public class ShippingBla
                 return order.WeightKg * 1.2 + 25;
 
             case "INTERNATIONAL":
-                return new InternationalShippingBla().InternationalShipping(order);
+                return new InternationalShippingBla().Calculate(order);
 
             default:
                 throw new Exception($"Unknown shipping type: {order.ShippingType}");
