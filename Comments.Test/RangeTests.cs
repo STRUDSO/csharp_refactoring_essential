@@ -8,17 +8,17 @@ public class RangeOfIntegersTests
     [Test]
     public void SumSquares()
     {
-        int a = 7;
-        int b = 12;
+        const int lower = 7;
+        const int upper = 12;
 
         // Expected: sum of squares from 7 to 12
-        int expected = 0;
-        for (int i = a; i <= b; i++)
+        var expected = 0;
+        for (var i = lower; i <= upper; i++)
         {
             expected += i * i;
         }
 
-        int actual = new RangeOfIntegers(a, b).SumSquares();
+        var actual = new RangeOfIntegers(lower, upper).SumSquares();
 
         Assert.That(actual, Is.EqualTo(expected));
     }
