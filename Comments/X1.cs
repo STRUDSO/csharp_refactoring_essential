@@ -1,12 +1,24 @@
 ﻿namespace Comments;
 
+public class Range
+{
+    public Range(int start, int end)
+    {
+        Start = start;
+        End = end;
+    }
+
+    public int Start { get; }
+    public int End { get; }
+}
+
 public class X1
 {
-    public static int M(int start, int end)
+    public static int M(Range range)
     {
         int accumulatedSum = 0;
 
-        for (int i = start; i <= end; i++)
+        for (int i = range.Start; i <= range.End; i++)
         {
             // Add square of each number in the range
             accumulatedSum += Square(i);

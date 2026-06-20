@@ -18,7 +18,7 @@ public class X1Test
             expected += i * i;
         }
 
-        int actual = X1.M(a, b);
+        int actual = X1.M(new Range(a, b));
 
         Assert.That(actual, Is.EqualTo(expected));
     }
