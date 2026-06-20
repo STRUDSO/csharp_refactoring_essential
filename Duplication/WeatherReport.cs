@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 public class WeatherReport
 {
@@ -9,7 +10,7 @@ public class WeatherReport
     {
         foreach (Forecast forecast in forecasts)
         {
-            string temperature = forecast.GetTemperature().ToString("0.0");
+            string temperature = forecast.GetTemperature().ToString("0.0", CultureInfo.InvariantCulture);
 
             if (forecast.IsMorning())
             {
