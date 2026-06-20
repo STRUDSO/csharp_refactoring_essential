@@ -85,25 +85,25 @@ public class CustomerServiceTest
     [Test]
     public void CalculateLoyaltyPoints_shouldReturnZero_whenNoPurchases()
     {
-        Assert.AreEqual(0, service.CalculateLoyaltyPoints(0));
+        Assert.AreEqual(0, service.LoyaltyCalculator.CalculateLoyaltyPoints(0));
     }
 
     [Test]
     public void CalculateLoyaltyPoints_shouldCalculateCorrectly_forPositiveValues()
     {
-        Assert.AreEqual(50, service.CalculateLoyaltyPoints(5));
+        Assert.AreEqual(50, service.LoyaltyCalculator.CalculateLoyaltyPoints(5));
     }
 
     [Test]
     public void CalculateLoyaltyPoints_shouldHandleLargeNumbers()
     {
-        Assert.AreEqual(100_000, service.CalculateLoyaltyPoints(10_000));
+        Assert.AreEqual(100_000, service.LoyaltyCalculator.CalculateLoyaltyPoints(10_000));
     }
 
     [Test]
     public void CalculateLoyaltyPoints_shouldAllowNegativeValues_butStillMultiply()
     {
-        Assert.AreEqual(-50, service.CalculateLoyaltyPoints(-5));
+        Assert.AreEqual(-50, service.LoyaltyCalculator.CalculateLoyaltyPoints(-5));
     }
 
     // -------------------------

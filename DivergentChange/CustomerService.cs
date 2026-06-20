@@ -34,20 +34,29 @@ public class FormatDisplay
     }
 }
 
+public class LoyaltyCalculator
+{
+    public int CalculateLoyaltyPoints(int numberOfPurchases)
+    {
+        return numberOfPurchases * 10;
+    }
+}
+
 public class CustomerService
 {
     private readonly FormatDisplay _formatDisplay = new FormatDisplay();
+    private readonly LoyaltyCalculator _loyaltyCalculator = new LoyaltyCalculator();
 
     public FormatDisplay FormatDisplayName1 => _formatDisplay;
+
+    public LoyaltyCalculator LoyaltyCalculator
+    {
+        get { return _loyaltyCalculator; }
+    }
 
     public bool IsValidEmail(string email)
     {
         return EmailValueObject.Parse(email) != null;
-    }
-
-    public int CalculateLoyaltyPoints(int numberOfPurchases)
-    {
-        return numberOfPurchases * 10;
     }
 
     public string DetermineAccountStatus(int daysSinceLastLogin)
