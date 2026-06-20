@@ -54,7 +54,7 @@ public class Order
         var subtotal = _orderItems.CalculateSubtotal();
 
         // Discount rules
-        var discount = CustomerBasedDiscount(subtotal);
+        var discount = _customer.DiscountStrategy()(subtotal);
 
         // Tax calculation
         var taxableAmount = CalculateTaxableAmount(subtotal, discount, out var tax);
@@ -63,11 +63,6 @@ public class Order
         var total = CalculateTotal(taxableAmount, tax);
 
         return new OrderSummary(subtotal, discount, tax, total);
-    }
-
-    private double CustomerBasedDiscount(double subtotal)
-    {
-        return _customer.DiscountStrategy()(subtotal);
     }
 
     private static double CalculateTotal(double taxableAmount, double tax)
