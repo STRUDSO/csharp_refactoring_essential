@@ -3,10 +3,10 @@
 using NUnit.Framework;
 
 [TestFixture]
-public class X1Test
+public class RangeTests
 {
     [Test]
-    public void T1()
+    public void SumSquares()
     {
         int a = 7;
         int b = 12;
@@ -18,7 +18,7 @@ public class X1Test
             expected += i * i;
         }
 
-        int actual = new Range(a, b).SumSquaresOf();
+        int actual = new Range(a, b).SumSquares();
 
         Assert.That(actual, Is.EqualTo(expected));
     }

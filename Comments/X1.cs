@@ -11,7 +11,7 @@ public class Range
     private int Start { get; }
     private int End { get; }
 
-    public int SumSquaresOf()
+    public int SumSquares()
     {
         int accumulatedSum = 0;
 
