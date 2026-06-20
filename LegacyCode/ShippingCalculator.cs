@@ -56,10 +56,10 @@ public class EverythingShippingCalculator : ICalculateShipping
 {
     public double Calculate(Order order)
     {
-        return Calculator(order).Calculate(order);
+        return Create(order).Calculate(order);
     }
 
-    private static ICalculateShipping Calculator(Order order)
+    private static ICalculateShipping Create(Order order)
     {
         ICalculateShipping calculateShipping = order.ShippingType switch
         {
