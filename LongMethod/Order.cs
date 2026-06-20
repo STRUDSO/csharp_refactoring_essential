@@ -26,13 +26,19 @@ public class Order
         var discount = CalculateDiscount(subtotal);
 
         // Tax calculation
-        double taxableAmount = subtotal - discount;
-        double tax = taxableAmount * 0.20;
+        var taxableAmount = TaxableAmount(subtotal, discount, out var tax);
 
         // Total calculation
         double total = taxableAmount + tax;
 
         return new OrderSummary(subtotal, discount, tax, total);
+    }
+
+    private static double TaxableAmount(double subtotal, double discount, out double tax)
+    {
+        double taxableAmount = subtotal - discount;
+        tax = taxableAmount * 0.20;
+        return taxableAmount;
     }
 
     private double CalculateDiscount(double subtotal)
