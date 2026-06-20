@@ -53,10 +53,8 @@ public class Order
 
         var discount = _customer.GetDiscountRule()(subtotal);
 
-        // Tax calculation
         var (taxableAmount, tax) = TaxableAmount(subtotal, discount);
 
-        // Total calculation
         var total = CalculateTotal(taxableAmount, tax);
 
         return new OrderSummary(subtotal, discount, tax, total);
