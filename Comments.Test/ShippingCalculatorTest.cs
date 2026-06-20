@@ -8,12 +8,13 @@ public class ShippingCalculatorTest
 {
 
     [Test]
-    public void ZeroOrderZeroShipping()
+    public void Order1001()
     {
         var actual = ShippingCalculator.TestableShipping(new Order
         {
-            ShippingType = "STANDARD"
+            ShippingType = "STANDARD",
+            WeightKg = 5
         });
-        Assert.That(actual, Is.EqualTo(0));
+        Assert.That(actual, Is.EqualTo(2.5));
     }
 }
