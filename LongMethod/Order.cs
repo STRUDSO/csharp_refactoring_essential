@@ -91,7 +91,7 @@ public class Order
     private double CalculateSubtotal()
     {
         double subtotal = 0.0;
-        foreach (var item in _items)
+        foreach (var item in _orderItems.Items)
         {
             subtotal += item.Price * item.Quantity;
         }
