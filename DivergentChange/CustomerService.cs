@@ -65,7 +65,7 @@ public class CustomerService
     private readonly LoyaltyCalculator _loyaltyCalculator = new();
     private readonly AccountStatusCalculator _accountStatusCalculator = new();
 
-    public FormatDisplay FormatDisplayName1 => _formatDisplay;
+    public FormatDisplay FormatDisplayName => _formatDisplay;
 
     public LoyaltyCalculator LoyaltyCalculator => _loyaltyCalculator;
 

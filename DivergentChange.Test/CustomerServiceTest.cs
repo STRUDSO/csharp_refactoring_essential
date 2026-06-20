@@ -60,21 +60,21 @@ public class CustomerServiceTest
     [Test]
     public void FormatDisplayName_shouldTrimAndUppercaseLastName()
     {
-        string result = service.FormatDisplayName1.FormatDisplayName(" John ", " smith ");
+        string result = service.FormatDisplayName.FormatDisplayName(" John ", " smith ");
         Assert.AreEqual("John SMITH", result);
     }
 
     [Test]
     public void FormatDisplayName_shouldHandleEmptyStrings()
     {
-        string result = service.FormatDisplayName1.FormatDisplayName("", "");
+        string result = service.FormatDisplayName.FormatDisplayName("", "");
         Assert.AreEqual(" ", result);
     }
 
     [Test]
     public void FormatDisplayName_shouldHandleSingleCharacterNames()
     {
-        string result = service.FormatDisplayName1.FormatDisplayName("A", "b");
+        string result = service.FormatDisplayName.FormatDisplayName("A", "b");
         Assert.AreEqual("A B", result);
     }
 
