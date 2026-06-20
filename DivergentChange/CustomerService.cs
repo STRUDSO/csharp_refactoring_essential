@@ -37,18 +37,30 @@ public class DisplayName
         _lastName = lastName;
     }
 
-    public string Format()
+    public string FormatDisplayName()
     {
         return _firstName.Trim() + " " + _lastName.Trim().ToUpper();
     }
 }
 
-public class LoyaltyCalculator
+public class NumberOf
 {
-    public int CalculateLoyaltyPoints(int numberOfPurchases)
+    public NumberOf(int numberOfPurchases)
     {
+        NumberOfPurchases = numberOfPurchases;
+    }
+
+    public int NumberOfPurchases { get; }
+
+    public int CalculateLoyaltyPoints()
+    {
+        var numberOfPurchases = NumberOfPurchases;
         return numberOfPurchases * 10;
     }
+}
+
+public class LoyaltyCalculator
+{
 }
 
 public class AccountStatusCalculator
@@ -70,10 +82,7 @@ public class AccountStatusCalculator
 
 public class CustomerService
 {
-    private readonly LoyaltyCalculator _loyaltyCalculator = new();
     private readonly AccountStatusCalculator _accountStatusCalculator = new();
-
-    public LoyaltyCalculator LoyaltyCalculator => _loyaltyCalculator;
 
     public AccountStatusCalculator AccountStatusCalculator => _accountStatusCalculator;
 
