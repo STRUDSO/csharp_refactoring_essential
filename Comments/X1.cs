@@ -2,11 +2,11 @@
 
 public class X1
 {
-    public static int M(int q, int z)
+    public static int M(int start, int end)
     {
         int accumulatedSum = 0;
 
-        for (int i = q; i <= z; i++)
+        for (int i = start; i <= end; i++)
         {
             // Add square of each number in the range
             accumulatedSum += Square(i);
