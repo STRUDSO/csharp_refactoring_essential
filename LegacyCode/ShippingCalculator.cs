@@ -19,7 +19,7 @@ public interface ICalculateShipping
     double Calculate(Order order);
 }
 
-public class InternationalShippingBla : ICalculateShipping
+public class InternationalShipping : ICalculateShipping
 {
     public double Calculate(Order order)
     {
@@ -45,12 +45,11 @@ public class ShippingBla
                 return order.WeightKg * 1.2 + 25;
 
             case "INTERNATIONAL":
-                calculateShipping = new InternationalShippingBla();
+                calculateShipping = new InternationalShipping();
                 return calculateShipping.Calculate(order);
             default:
                 throw new Exception($"Unknown shipping type: {order.ShippingType}");
         }
-        
     }
 }
 
