@@ -72,7 +72,8 @@ public class Order
 
     private double CalculateILoyalDiscount(double subtotal)
     {
-        if (100 < subtotal)
+        const double discountLowerLimit = 100;
+        if (discountLowerLimit < subtotal)
         {
             return subtotal * 0.05;
         }
