@@ -27,9 +27,9 @@ public class InternationalShipping : ICalculateShipping
     }
 }
 
-public class OverNight
+public class OverNight : ICalculateShipping
 {
-    public static double OverNight_(Order order)
+    public double Calculate(Order order)
     {
         return order.WeightKg * 1.2 + 25;
     }
@@ -50,8 +50,8 @@ public class ShippingBla
                        + order.DistanceKm * 0.1;
 
             case "OVERNIGHT":
-                return LegacyCode.OverNight.OverNight_(order);
-
+                calculateShipping = new OverNight();
+                break;
             case "INTERNATIONAL":
                 calculateShipping = new InternationalShipping();
                 break;
