@@ -52,9 +52,14 @@ public class StandardCal : ICalculateShipping
     }
 }
 
-public class ShippingBla
+public class ShippingBla : ICalculateShipping
 {
     public static double Shipping_(Order order)
+    {
+        return Calculator(order).Calculate(order);
+    }
+
+    private static ICalculateShipping Calculator(Order order)
     {
         ICalculateShipping calculateShipping = order.ShippingType switch
         {
@@ -64,7 +69,12 @@ public class ShippingBla
             "INTERNATIONAL" => new InternationalShipping(),
             _ => throw new Exception($"Unknown shipping type: {order.ShippingType}")
         };
-        return calculateShipping.Calculate(order);
+        return calculateShipping;
+    }
+
+    public double Calculate(Order order)
+    {
+        throw new NotImplementedException();
     }
 }
 
