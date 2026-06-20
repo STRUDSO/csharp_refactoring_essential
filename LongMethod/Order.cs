@@ -57,9 +57,9 @@ public class Order
         double discount;
         
         if(_customer.IsLoyal)
-            discount = CalculateDiscount(subtotal, true);
+            discount = CalculateLoyalDiscount(subtotal);
         else
-            discount = CalculateDiscount(subtotal, false);
+            discount = CalculateILoyalDiscount(subtotal);
 
         // Tax calculation
         var taxableAmount = CalculateTaxableAmount(subtotal, discount, out var tax);
@@ -69,6 +69,25 @@ public class Order
 
         return new OrderSummary(subtotal, discount, tax, total);
     }
+
+    private double CalculateILoyalDiscount(double subtotal)
+    {
+        double discount;
+        double discount1 = 0.0;
+        if (false)
+        {
+            discount1 = subtotal * 0.10;
+        }
+        else if (subtotal > 100)
+        {
+            discount1 = subtotal * 0.05;
+        }
+
+        discount = discount1;
+        return discount;
+    }
+
+    private double CalculateLoyalDiscount(double subtotal) => subtotal * 0.10;
 
     private static double CalculateTotal(double taxableAmount, double tax)
     {
@@ -81,21 +100,6 @@ public class Order
         double taxableAmount = subtotal - discount;
         tax = taxableAmount * 0.20;
         return taxableAmount;
-    }
-
-    private double CalculateDiscount(double subtotal, bool customerIsLoyal)
-    {
-        double discount = 0.0;
-        if (customerIsLoyal)
-        {
-            discount = subtotal * 0.10;
-        }
-        else if (subtotal > 100)
-        {
-            discount = subtotal * 0.05;
-        }
-
-        return discount;
     }
 }
 
