@@ -56,16 +56,14 @@ public class ShippingBla
 {
     public static double Shipping_(Order order)
     {
-        ICalculateShipping? calculateShipping = order.ShippingType switch
+        ICalculateShipping calculateShipping = order.ShippingType switch
         {
             "STANDARD" => new StandardCal(),
             "EXPRESS" => new ExpressCalc(),
             "OVERNIGHT" => new OverNight(),
             "INTERNATIONAL" => new InternationalShipping(),
-            _ => null
+            _ => throw new Exception($"Unknown shipping type: {order.ShippingType}")
         };
-        if(calculateShipping == null)
-                throw new Exception($"Unknown shipping type: {order.ShippingType}");
         return calculateShipping.Calculate(order);
     }
 }
