@@ -88,12 +88,12 @@ public class Order
 
     private void ValidateItems()
     {
-        if (_items == null)
+        if (_orderItems.Items == null)
         {
             throw new InvalidOperationException("Items cannot be null");
         }
 
-        if (_items.Count == 0)
+        if (_orderItems.Items.Count == 0)
         {
             throw new InvalidOperationException("Order must contain items");
         }
