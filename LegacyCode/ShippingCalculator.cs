@@ -14,6 +14,39 @@ public class Order
     public bool Fragile { get; set; }
 }
 
+public class InternationalShippingBla
+{
+    public double InternationalShipping(Order order)
+    {
+        return order.WeightKg * 1.5;
+    }
+}
+
+public class ShippingBla
+{
+    public static double Shipping_(Order order)
+    {
+        switch (order.ShippingType)
+        {
+            case "STANDARD":
+                return order.WeightKg * 0.5;
+
+            case "EXPRESS":
+                return order.WeightKg * 0.8
+                       + order.DistanceKm * 0.1;
+
+            case "OVERNIGHT":
+                return order.WeightKg * 1.2 + 25;
+
+            case "INTERNATIONAL":
+                return new InternationalShippingBla().InternationalShipping(order);
+
+            default:
+                throw new Exception($"Unknown shipping type: {order.ShippingType}");
+        }
+    }
+}
+
 public class ShippingCalculator
 {
     private readonly HttpClient _httpClient = new HttpClient();
@@ -57,24 +90,7 @@ public class ShippingCalculator
 
     public static double TestableShipping(Order order)
     {
-        switch (order.ShippingType)
-        {
-            case "STANDARD":
-                return order.WeightKg * 0.5;
-
-            case "EXPRESS":
-                return order.WeightKg * 0.8
-                       + order.DistanceKm * 0.1;
-
-            case "OVERNIGHT":
-                return order.WeightKg * 1.2 + 25;
-
-            case "INTERNATIONAL":
-                return order.WeightKg * 1.5;
-
-            default:
-                throw new Exception($"Unknown shipping type: {order.ShippingType}");
-        }
+        return ShippingBla.Shipping_(order);
     }
 }
 
