@@ -31,7 +31,7 @@ public class ShippingBla
 {
     public static double Shipping_(Order order)
     {
-        ICalculateShipping? calculateShipping;
+        ICalculateShipping? calculateShipping = null;
         switch (order.ShippingType)
         {
             case "STANDARD":
@@ -46,10 +46,11 @@ public class ShippingBla
 
             case "INTERNATIONAL":
                 calculateShipping = new InternationalShipping();
-                return calculateShipping.Calculate(order);
-            default:
-                throw new Exception($"Unknown shipping type: {order.ShippingType}");
+                break;
         }
+        if(calculateShipping == null)
+                throw new Exception($"Unknown shipping type: {order.ShippingType}");
+        return calculateShipping.Calculate(order);
     }
 }
 
