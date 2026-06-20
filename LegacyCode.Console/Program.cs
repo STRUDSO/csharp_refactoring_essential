@@ -19,18 +19,25 @@ public class ShippingApp
             return;
         }
 
-        var calculator = new ShippingCalculator();
+        var httpClient = new System.Net.Http.HttpClient();
+        var order = new Order(httpClient);
 
         try
         {
-            double cost = calculator.CalculateShipping(orderId);
+            OrderData? orderData = order.GetOrder(orderId);
+
+            if (orderData == null)
+                throw new Exception("Failed to fetch order");
+
+            var calculator = new EverythingShippingCalculator();
+            double cost = calculator.Calculate(orderData);
 
             Console.WriteLine($"Order ID: {orderId}");
             Console.WriteLine($"Shipping cost: {cost}");
         }
         catch (Exception e)
         {
-            Console.WriteLine($"Failed to calculate shipping for order {orderId}");
+            Consol.WriteLine($"Failed to calculate shipping for order {orderId}");
             Console.WriteLine(e);
         }
     }
