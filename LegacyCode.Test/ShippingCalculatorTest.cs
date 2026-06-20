@@ -1,6 +1,4 @@
-using LegacyCode;
-
-namespace Comments.Test;
+namespace LegacyCode.Test;
 
 [TestFixture]
 [TestOf(typeof(ShippingCalculator))]
@@ -12,13 +10,13 @@ public class ShippingCalculatorTest {
     [TestCase("INTERNATIONAL",     2,    50,  3.0)]
     public void Order1001(string shippingType, double weightKg, double distanceKm, double expected)
     {
-        Order order = new Order
+        OrderData orderData = new OrderData
         {
             ShippingType = shippingType,
             WeightKg = weightKg,
             DistanceKm = distanceKm
         };
-        var actual = new EverythingShippingCalculator().Calculate(order);
+        var actual = new EverythingShippingCalculator().Calculate(orderData);
         Assert.That(actual, Is.EqualTo(expected));
     }
 }

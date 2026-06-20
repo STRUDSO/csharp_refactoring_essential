@@ -1,73 +1,62 @@
 ﻿namespace LegacyCode;
 
 using System;
-using System.Net.Http;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
-public class Order
-{
-    public int OrderId { get; set; }
-    public string ShippingType { get; set; }
-    public double WeightKg { get; set; }
-    public double DistanceKm { get; set; }
-    public bool Fragile { get; set; }
-}
 
 public interface ICalculateShipping
 {
-    double Calculate(Order order);
+    double Calculate(OrderData orderData);
 }
 
 public class InternationalShipping : ICalculateShipping
 {
-    public double Calculate(Order order)
+    public double Calculate(OrderData orderData)
     {
-        return order.WeightKg * 1.5;
+        return orderData.WeightKg * 1.5;
     }
 }
 
-public class OverNight : ICalculateShipping
+public class OverNightShipping : ICalculateShipping
 {
-    public double Calculate(Order order)
+    public double Calculate(OrderData orderData)
     {
-        return order.WeightKg * 1.2 + 25;
+        return orderData.WeightKg * 1.2 + 25;
     }
 }
 
-public class ExpressCalc : ICalculateShipping
+public class ExpressShipping : ICalculateShipping
 {
-    public double Calculate(Order order)
+    public double Calculate(OrderData orderData)
     {
-        return order.WeightKg * 0.8
-               + order.DistanceKm * 0.1;
+        return orderData.WeightKg * 0.8
+               + orderData.DistanceKm * 0.1;
     }
 }
 
-public class StandardCal : ICalculateShipping
+public class StandardShipping : ICalculateShipping
 {
-    public double Calculate(Order order)
+    public double Calculate(OrderData orderData)
     {
-        return order.WeightKg * 0.5;
+        return orderData.WeightKg * 0.5;
     }
 }
 
 public class EverythingShippingCalculator : ICalculateShipping
 {
-    public double Calculate(Order order)
+    public double Calculate(OrderData orderData)
     {
-        return Create(order).Calculate(order);
+        return Create(orderData).Calculate(orderData);
     }
 
-    private static ICalculateShipping Create(Order order)
+    private static ICalculateShipping Create(OrderData orderData)
     {
-        return order.ShippingType switch
+        return orderData.ShippingType switch
         {
-            "STANDARD" => new StandardCal(),
-            "EXPRESS" => new ExpressCalc(),
-            "OVERNIGHT" => new OverNight(),
+            "STANDARD" => new StandardShipping(),
+            "EXPRESS" => new ExpressShipping(),
+            "OVERNIGHT" => new OverNightShipping(),
             "INTERNATIONAL" => new InternationalShipping(),
-            _ => throw new Exception($"Unknown shipping type: {order.ShippingType}")
+            _ => throw new Exception($"Unknown shipping type: {orderData.ShippingType}")
         };
     }
 }
@@ -75,49 +64,30 @@ public class EverythingShippingCalculator : ICalculateShipping
 public class ShippingCalculator
 {
     private readonly EverythingShippingCalculator _shippingCalculator = new();
-    private readonly HttpClient _httpClient = new();
+    public readonly HttpClient _httpClient = new();
+    private readonly Order _order;
+
+    public ShippingCalculator()
+    {
+        _order = new Order(_httpClient);
+    }
 
     public double CalculateShipping(int orderId)
     {
         try
         {
-            var order = GetOrder(orderId);
+            var orderData = _order.GetOrder(orderId);
 
-            if (order == null)
+            if (orderData == null)
                 throw new Exception("Failed to deserialize order");
             
-            return _shippingCalculator.Calculate(order);
+            return _shippingCalculator.Calculate(orderData);
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
             return -1;
         }
-    }
-
-    private Order? GetOrder(int orderId)
-    {
-        var url = $"https://codemanship.co.uk/api/orders.php?orderId={orderId}";
-
-        var response = _httpClient
-            .GetAsync(url)
-            .GetAwaiter()
-            .GetResult();
-
-        response.EnsureSuccessStatusCode();
-
-        var json = response.Content
-            .ReadAsStringAsync()
-            .GetAwaiter()
-            .GetResult();
-
-        var options = new JsonSerializerOptions
-        {
-            PropertyNameCaseInsensitive = true
-        };
-            
-        var order = JsonSerializer.Deserialize<Order>(json, options);
-        return order;
     }
 }
 

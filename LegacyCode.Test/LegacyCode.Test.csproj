@@ -6,6 +6,7 @@
         <Nullable>enable</Nullable>
 
         <IsPackable>false</IsPackable>
+        <IsTestProject>true</IsTestProject>
     </PropertyGroup>
 
     <ItemGroup>
@@ -17,7 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Comments\Comments.csproj" />
+      <ProjectReference Include="..\LegacyCode\LegacyCode.csproj" />
     </ItemGroup>
 
 </Project>
