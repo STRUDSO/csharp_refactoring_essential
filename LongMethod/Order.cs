@@ -24,6 +24,11 @@ public class OrderItems
             throw new InvalidOperationException("Order must contain items");
         }
     }
+
+    public double CalculateSubtotal()
+    {
+        return Items.Sum(item => item.Price * item.Quantity);
+    }
 }
 
 public class Order
@@ -46,7 +51,7 @@ public class Order
         _orderItems.ValidateItems();
 
         // Subtotal calculation
-        var subtotal = CalculateSubtotal();
+        var subtotal = _orderItems.CalculateSubtotal();
 
         // Discount rules
         var discount = CalculateDiscount(subtotal);
@@ -86,11 +91,6 @@ public class Order
         }
 
         return discount;
-    }
-
-    private double CalculateSubtotal()
-    {
-        return _orderItems.Items.Sum(item => item.Price * item.Quantity);
     }
 }
 
