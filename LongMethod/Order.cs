@@ -5,14 +5,11 @@ using System.Collections.Generic;
 
 public class Order
 {
-    private readonly List<OrderItem> _items;
     private readonly OrderItems _orderItems;
     private readonly Customer _customer;
 
     public Order(OrderItems orderItems, Customer customer)
     {
-        _orderItems = orderItems;
-        _items = orderItems.Items;
         _orderItems = orderItems;
         _customer = customer;
     }
