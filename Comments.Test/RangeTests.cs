@@ -11,7 +11,7 @@ public class RangeOfIntegersTests
         const int lower = 7;
         const int upper = 12;
 
-        // Expected: sum of squares from 7 to 12
+        // Expected: Sum of squares from 7 to 12
         var expected = 0;
         for (var i = lower; i <= upper; i++)
         {
