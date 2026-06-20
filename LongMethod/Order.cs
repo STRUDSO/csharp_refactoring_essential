@@ -11,6 +11,19 @@ public class OrderItems
     }
 
     public List<OrderItem> Items { get; }
+
+    public void ValidateItems()
+    {
+        if (Items == null)
+        {
+            throw new InvalidOperationException("Items cannot be null");
+        }
+
+        if (Items.Count == 0)
+        {
+            throw new InvalidOperationException("Order must contain items");
+        }
+    }
 }
 
 public class Order
@@ -30,7 +43,7 @@ public class Order
     public OrderSummary Summarise()
     {
         // Validation
-        ValidateItems();
+        _orderItems.ValidateItems();
 
         // Subtotal calculation
         var subtotal = CalculateSubtotal();
@@ -84,19 +97,6 @@ public class Order
         }
 
         return subtotal;
-    }
-
-    private void ValidateItems()
-    {
-        if (_orderItems.Items == null)
-        {
-            throw new InvalidOperationException("Items cannot be null");
-        }
-
-        if (_orderItems.Items.Count == 0)
-        {
-            throw new InvalidOperationException("Order must contain items");
-        }
     }
 }
 
