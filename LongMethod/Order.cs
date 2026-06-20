@@ -67,32 +67,8 @@ public class Order
 
     private double CustomerBasedDiscount(double subtotal)
     {
-        Func<double, double> discountStrategy;
-        if(_customer.IsLoyal)
-        {
-            discountStrategy = CalculateLoyalDiscount;
-        }
-        else
-        {
-            discountStrategy = CalculateILoyalDiscount;
-            
-        }
-
-        return discountStrategy(subtotal);
+        return _customer.DiscountStrategy()(subtotal);
     }
-
-    private double CalculateILoyalDiscount(double subtotal)
-    {
-        const double discountLowerLimit = 100;
-        if (discountLowerLimit < subtotal)
-        {
-            return subtotal * 0.05;
-        }
-
-        return 0.0;
-    }
-
-    private double CalculateLoyalDiscount(double subtotal) => subtotal * 0.10;
 
     private static double CalculateTotal(double taxableAmount, double tax)
     {
@@ -110,12 +86,34 @@ public class Order
 
 public class Customer
 {
-    public bool IsLoyal { get; }
+    private bool IsLoyal { get; }
 
     public Customer(bool loyal)
     {
         IsLoyal = loyal;
     }
+
+    public Func<double, double> DiscountStrategy()
+    {
+        Func<double, double> discountStrategy = 
+            IsLoyal 
+                ? CalculateLoyalDiscount 
+                : CalculateILoyalDiscount;
+        return discountStrategy;
+    }
+
+    private static double CalculateILoyalDiscount(double subtotal)
+    {
+        const double discountLowerLimit = 100;
+        if (discountLowerLimit < subtotal)
+        {
+            return subtotal * 0.05;
+        }
+
+        return 0.0;
+    }
+
+    private static double CalculateLoyalDiscount(double subtotal) => subtotal * 0.10;
 }
 
 public class OrderItem
