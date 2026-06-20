@@ -8,6 +8,7 @@ public class ShippingCalculatorTest
 {
 
     [TestCase("STANDARD", 5, 2.5)]
+    [TestCase("OVERNIGHT", 2, 27.4)]
     public void Order1001(string shippingType, double weightKg, double expected)
     {
         var actual = ShippingCalculator.TestableShipping(new Order
