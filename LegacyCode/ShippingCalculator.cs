@@ -56,11 +56,6 @@ public class ShippingBla : ICalculateShipping
 {
     public double Calculate(Order order)
     {
-        return Shipping_(order);
-    }
-
-    public static double Shipping_(Order order)
-    {
         return Calculator(order).Calculate(order);
     }
 
