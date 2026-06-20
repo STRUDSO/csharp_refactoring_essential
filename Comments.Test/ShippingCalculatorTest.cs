@@ -7,14 +7,14 @@ namespace Comments.Test;
 public class ShippingCalculatorTest
 {
 
-    [Test]
-    public void Order1001()
+    [TestCase("STANDARD", 5, 2.5)]
+    public void Order1001(string shippingType, double weightKg, double expected)
     {
         var actual = ShippingCalculator.TestableShipping(new Order
         {
-            ShippingType = "STANDARD",
-            WeightKg = 5
+            ShippingType = shippingType,
+            WeightKg = weightKg
         });
-        Assert.That(actual, Is.EqualTo(2.5));
+        Assert.That(actual, Is.EqualTo(expected));
     }
 }
