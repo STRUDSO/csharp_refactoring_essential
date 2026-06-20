@@ -37,7 +37,7 @@ public class ShippingApp
         }
         catch (Exception e)
         {
-            Consol.WriteLine($"Failed to calculate shipping for order {orderId}");
+            Console.WriteLine($"Failed to calculate shipping for order {orderId}");
             Console.WriteLine(e);
         }
     }
