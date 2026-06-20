@@ -42,23 +42,8 @@ public class LoyaltyCalculator
     }
 }
 
-public class CustomerService
+public class AccountStatusCalculator
 {
-    private readonly FormatDisplay _formatDisplay = new FormatDisplay();
-    private readonly LoyaltyCalculator _loyaltyCalculator = new LoyaltyCalculator();
-
-    public FormatDisplay FormatDisplayName1 => _formatDisplay;
-
-    public LoyaltyCalculator LoyaltyCalculator
-    {
-        get { return _loyaltyCalculator; }
-    }
-
-    public bool IsValidEmail(string email)
-    {
-        return EmailValueObject.Parse(email) != null;
-    }
-
     public string DetermineAccountStatus(int daysSinceLastLogin)
     {
         if (daysSinceLastLogin > 365)
@@ -71,5 +56,23 @@ public class CustomerService
         }
 
         return "ACTIVE";
+    }
+}
+
+public class CustomerService
+{
+    private readonly FormatDisplay _formatDisplay = new();
+    private readonly LoyaltyCalculator _loyaltyCalculator = new();
+    private readonly AccountStatusCalculator _accountStatusCalculator = new();
+
+    public FormatDisplay FormatDisplayName1 => _formatDisplay;
+
+    public LoyaltyCalculator LoyaltyCalculator => _loyaltyCalculator;
+
+    public AccountStatusCalculator AccountStatusCalculator => _accountStatusCalculator;
+
+    public bool IsValidEmail(string email)
+    {
+        return EmailValueObject.Parse(email) != null;
     }
 }

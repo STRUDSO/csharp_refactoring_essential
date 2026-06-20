@@ -113,25 +113,25 @@ public class CustomerServiceTest
     [Test]
     public void DetermineAccountStatus_shouldReturnInactive_whenDaysOver365()
     {
-        Assert.AreEqual("INACTIVE", service.DetermineAccountStatus(366));
+        Assert.AreEqual("INACTIVE", service.AccountStatusCalculator.DetermineAccountStatus(366));
     }
 
     [Test]
     public void DetermineAccountStatus_shouldReturnDormant_whenBetween31And365()
     {
-        Assert.AreEqual("DORMANT", service.DetermineAccountStatus(100));
+        Assert.AreEqual("DORMANT", service.AccountStatusCalculator.DetermineAccountStatus(100));
     }
 
     [Test]
     public void DetermineAccountStatus_shouldReturnActive_when30DaysOrLess()
     {
-        Assert.AreEqual("ACTIVE", service.DetermineAccountStatus(30));
-        Assert.AreEqual("ACTIVE", service.DetermineAccountStatus(0));
+        Assert.AreEqual("ACTIVE", service.AccountStatusCalculator.DetermineAccountStatus(30));
+        Assert.AreEqual("ACTIVE", service.AccountStatusCalculator.DetermineAccountStatus(0));
     }
 
     [Test]
     public void DetermineAccountStatus_shouldTreatNegativeDaysAsActive()
     {
-        Assert.AreEqual("ACTIVE", service.DetermineAccountStatus(-10));
+        Assert.AreEqual("ACTIVE", service.AccountStatusCalculator.DetermineAccountStatus(-10));
     }
 }
