@@ -35,9 +35,9 @@ public class OverNight : ICalculateShipping
     }
 }
 
-public class ExpressCalc
+public class ExpressCalc : ICalculateShipping
 {
-    public static double Calculate(Order order)
+    public double Calculate(Order order)
     {
         return order.WeightKg * 0.8
                + order.DistanceKm * 0.1;
@@ -55,7 +55,8 @@ public class ShippingBla
                 return order.WeightKg * 0.5;
 
             case "EXPRESS":
-                return ExpressCalc.Calculate(order);
+                calculateShipping = new ExpressCalc();
+                break;
             case "OVERNIGHT":
                 calculateShipping = new OverNight();
                 break;
