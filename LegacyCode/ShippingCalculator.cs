@@ -41,7 +41,7 @@ public class StandardShipping : ICalculateShipping
     }
 }
 
-public class EverythingShippingCalculator : ICalculateShipping
+public class ShippingCalculator : ICalculateShipping
 {
     public double Calculate(OrderData orderData)
     {
@@ -60,34 +60,3 @@ public class EverythingShippingCalculator : ICalculateShipping
         };
     }
 }
-
-public class ShippingCalculator
-{
-    private readonly EverythingShippingCalculator _shippingCalculator = new();
-    public readonly HttpClient _httpClient = new();
-    private readonly Order _order;
-
-    public ShippingCalculator()
-    {
-        _order = new Order(_httpClient);
-    }
-
-    public double CalculateShipping(int orderId)
-    {
-        try
-        {
-            var orderData = _order.GetOrder(orderId);
-
-            if (orderData == null)
-                throw new Exception("Failed to deserialize order");
-            
-            return _shippingCalculator.Calculate(orderData);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            return -1;
-        }
-    }
-}
-

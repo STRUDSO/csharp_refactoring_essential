@@ -16,7 +16,7 @@ public class ShippingCalculatorTest {
             WeightKg = weightKg,
             DistanceKm = distanceKm
         };
-        var actual = new EverythingShippingCalculator().Calculate(orderData);
+        var actual = new ShippingCalculator().Calculate(orderData);
         Assert.That(actual, Is.EqualTo(expected));
     }
 }

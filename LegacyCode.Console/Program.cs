@@ -29,8 +29,8 @@ public class ShippingApp
             if (orderData == null)
                 throw new Exception("Failed to fetch order");
 
-            var calculator = new EverythingShippingCalculator();
-            double cost = calculator.Calculate(orderData);
+            var shippingCalculatorcalculator = new ShippingCalculator();
+            double cost = shippingCalculatorcalculator.Calculate(orderData);
 
             Console.WriteLine($"Order ID: {orderId}");
             Console.WriteLine($"Shipping cost: {cost}");
