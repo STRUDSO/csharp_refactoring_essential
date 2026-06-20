@@ -61,7 +61,7 @@ public class EverythingShippingCalculator : ICalculateShipping
 
     private static ICalculateShipping Create(Order order)
     {
-        ICalculateShipping calculateShipping = order.ShippingType switch
+        return order.ShippingType switch
         {
             "STANDARD" => new StandardCal(),
             "EXPRESS" => new ExpressCalc(),
@@ -69,7 +69,6 @@ public class EverythingShippingCalculator : ICalculateShipping
             "INTERNATIONAL" => new InternationalShipping(),
             _ => throw new Exception($"Unknown shipping type: {order.ShippingType}")
         };
-        return calculateShipping;
     }
 }
 
