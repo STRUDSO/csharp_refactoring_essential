@@ -54,6 +54,11 @@ public class StandardCal : ICalculateShipping
 
 public class ShippingBla : ICalculateShipping
 {
+    public double Calculate(Order order)
+    {
+        return Shipping_(order);
+    }
+
     public static double Shipping_(Order order)
     {
         return Calculator(order).Calculate(order);
@@ -70,11 +75,6 @@ public class ShippingBla : ICalculateShipping
             _ => throw new Exception($"Unknown shipping type: {order.ShippingType}")
         };
         return calculateShipping;
-    }
-
-    public double Calculate(Order order)
-    {
-        throw new NotImplementedException();
     }
 }
 
@@ -121,7 +121,7 @@ public class ShippingCalculator
 
     public static double TestableShipping(Order order)
     {
-        return ShippingBla.Shipping_(order);
+        return new ShippingBla().Calculate(order);
     }
 }
 
