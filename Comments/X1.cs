@@ -14,13 +14,12 @@ public class Range
 
 public class X1
 {
-    public static int M(Range range)
+    public static int SumSquaresOf(Range range)
     {
         int accumulatedSum = 0;
 
         for (int i = range.Start; i <= range.End; i++)
         {
-            // Add square of each number in the range
             accumulatedSum += Square(i);
         }
 
